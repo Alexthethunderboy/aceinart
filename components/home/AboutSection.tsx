@@ -17,11 +17,13 @@ export function AboutSection({ data, settings }: AboutSectionProps) {
   const bio = data?.mainContent || [
     {
       _type: 'block',
-      children: [{ _type: 'span', text: "I'm Achilihu Chinedu Emmanuel, a creative technologist and visual artist based in Lagos, Nigeria. My work exists at the intersection of art, design, and technology—where pixels become poetry and code transforms into canvas." }]
+      _key: 'block1',
+      children: [{ _type: 'span', _key: 'span1', text: "I'm Achilihu Chinedu Emmanuel, a creative technologist and visual artist based in Lagos, Nigeria. My work exists at the intersection of art, design, and technology—where pixels become poetry and code transforms into canvas." }]
     },
     {
       _type: 'block',
-      children: [{ _type: 'span', text: "Through digital mediums, I explore themes of identity, culture, and the human experience in our increasingly connected world. Each piece is an experiment, a question posed in color and form, inviting viewers to pause and reflect." }]
+      _key: 'block2',
+      children: [{ _type: 'span', _key: 'span2', text: "Through digital mediums, I explore themes of identity, culture, and the human experience in our increasingly connected world. Each piece is an experiment, a question posed in color and form, inviting viewers to pause and reflect." }]
     }
   ];
 
