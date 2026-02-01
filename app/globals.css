@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Pigment & Pulse Theme - Dark & Colorful Enforced */
+
+    /* Deep Black/Navy Background */
+    --background: 222 47% 2%;
+    /* #02040a - Deep Navy Black */
+    --foreground: 210 40% 98%;
+    /* Soft White */
+
+    /* Glassmorphic Card Backgrounds */
+    --card: 222 47% 4%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 4%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Vibrant Primary - Electric Purple/Blue Gradient feel via single color for now, or use gradient in utilities */
+    --primary: 265 89% 66%;
+    /* #9d4edd - Electric Purple */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 199 89% 48%;
+    /* #0da2ff - Electric Blue */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 316 73% 52%;
+    /* #d9048e - Hot Pink */
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 265 89% 66%;
+
+    --radius: 0.75rem;
+    /* Slightly more rounded for modern feel */
+
+    /* Custom Neon/Glow Variables can be added here if needed, but Tailwind config is better for specifics */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
