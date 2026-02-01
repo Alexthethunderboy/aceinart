@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { urlForImage } from "@/lib/sanity/image";
 
+import { SanityImage } from "@/lib/types";
+
 interface ProcessPulseProps {
-  items: any[]; // Sanity image objects
+  items: SanityImage[]; // Sanity image objects
   className?: string;
 }
 

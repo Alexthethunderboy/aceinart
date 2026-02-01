@@ -22,12 +22,12 @@ export function BrandLogo({ settings, className, size = "md" }: BrandLogoProps) 
     hero: "w-48 sm:w-64 md:w-80 lg:w-[400px]", // Placeholder size
   };
 
-  const hasLogo = !!settings?.logo;
+  const logo = settings?.logo;
 
-  const content = hasLogo ? (
+  const content = logo ? (
      <div className={cn("relative transition-all duration-300", sizeClasses[size], className)}>
          <Image 
-           src={urlForImage(settings.logo).url()} 
+           src={urlForImage(logo).url()} 
            alt="AceInArt Logo"
            width={800}
            height={400}

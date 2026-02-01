@@ -48,7 +48,7 @@ export function HomeBentoGallery({ initialArtworks }: { initialArtworks: Artwork
                         className="h-full min-h-[280px]"
                     >
                          {(() => {
-                           const mockUrl = (art as any).mockUrl;
+                           const mockUrl = art.mockUrl;
                            const hasValidImage = art.mainImage && art.mainImage.asset && art.mainImage.asset._ref && !art.mainImage.asset._ref.includes('mock');
                            
                            if (mockUrl) {

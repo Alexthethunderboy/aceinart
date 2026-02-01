@@ -53,7 +53,9 @@ export interface Artwork {
   mockUrl?: string
 }
 
+import { PortableTextBlock } from "sanity";
+
 export interface AboutPage {
-  mainContent?: any[] // Portable Text complex type, simpler to leave as any[] or PortableText type if strict
+  mainContent?: PortableTextBlock[] 
   philosophyItems?: string[]
 }

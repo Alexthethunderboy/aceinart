@@ -105,7 +105,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   </h3>
                   <div className="grid grid-cols-1 gap-8">
                     {/* Reuse home layout loop style? No, simple stack is fine for sidebar feel or grid */}
-                    {art.related.map((relatedArt: any) => (
+                    {art.related.map((relatedArt: Artwork) => (
                       <ArtworkCard key={relatedArt._id} artwork={relatedArt} />
                     ))}
                   </div>
