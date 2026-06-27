@@ -37,6 +37,26 @@ export default defineType({
       ]
     }),
     defineField({
+      name: 'gallery',
+      title: 'Artwork Gallery',
+      type: 'array',
+      description: 'Upload as many images or video files (.mp4) as you want to showcase this piece.',
+      of: [
+        { 
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            { name: 'alt', type: 'string', title: 'Alternative Text' }
+          ]
+        },
+        { 
+          type: 'file',
+          title: 'Video File',
+          options: { accept: 'video/mp4,video/webm' }
+        }
+      ],
+    }),
+    defineField({
       name: 'year',
       title: 'Year created',
       type: 'string',
@@ -71,7 +91,7 @@ export default defineType({
       title: 'Artist Note (The Regret/Thought)',
       type: 'text',
       description: 'Handwritten style note for Raw Mode. E.g. "I hate the shading here."',
-      hidden: ({document}) => {
+      hidden: () => {
         // Optional logic to hide if level > 5, but maybe we want notes on good art too?
         // User said: "A 'Post-it' note element is attached... with the artist's regret"
         return false
@@ -123,7 +143,7 @@ export default defineType({
       media: 'mainImage',
     },
     prepare(selection) {
-      const {title, level} = selection
+      const {level} = selection
       return {
         ...selection,
         subtitle: `Level: ${level} - ${level <= 5 ? 'Raw/Failed' : 'Polished'}`,

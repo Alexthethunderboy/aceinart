@@ -17,6 +17,10 @@ export const artworksQuery = groq`*[_type == "artwork"] | order(year desc) {
   description,
   mood,
   artistNote,
+  gallery[] {
+    ...,
+    "assetUrl": asset->url
+  },
   category->{
     title,
     slug
@@ -37,6 +41,10 @@ export const artworkBySlugQuery = groq`*[_type == "artwork" && slug.current == $
   accentColor,
   creativeDNA,
   progress,
+  gallery[] {
+    ...,
+    "assetUrl": asset->url
+  },
   category->{
     title,
     slug

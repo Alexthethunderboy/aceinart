@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { PortableText } from "@portabletext/react";
-import Image from "next/image";
+
 
 import { urlForImage } from "@/lib/sanity/image";
 import { Settings, AboutPage } from "@/lib/types";

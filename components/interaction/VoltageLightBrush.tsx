@@ -66,7 +66,6 @@ export function VoltageLightBrush() {
 
       for (let i = 1; i < touchCords.current.length; i++) {
         // Use quadratic bezier curves for smoothness
-        const p0 = touchCords.current[i - 1];
         const p1 = touchCords.current[i];
         
         ctx.lineTo(p1[0], p1[1]);

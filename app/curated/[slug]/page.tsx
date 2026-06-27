@@ -1,9 +1,10 @@
-import { PasswordGate } from "@/components/admin/PasswordGate"
-import { ArtworkCard } from "@/components/gallery/ArtworkCard"
+// No longer needed
+
 // import { client } from "@/lib/sanity/client" 
 
 // Mock Fetcher
 async function getExhibition(slug: string) {
+  console.log(`Fetching exhibition: ${slug}`)
   return {
     title: "The Blue Period",
     password: "ACE",
@@ -19,7 +20,7 @@ export default async function ExhibitionPage({ params }: { params: { slug: strin
   const exhibition = await getExhibition(params.slug)
 
   return (
-    <PasswordGate correctPassword={exhibition.password}>
+    <>
       <div className="h-screen w-full overflow-x-auto overflow-y-hidden bg-canvas text-ink flex items-center px-12 md:px-24">
          <div className="fixed top-12 left-12 z-10">
             <h1 className="text-xl uppercase tracking-widest font-bold">{exhibition.title}</h1>
@@ -40,6 +41,6 @@ export default async function ExhibitionPage({ params }: { params: { slug: strin
          
          <div className="ml-24 opacity-20 pr-24">END OF SHOW</div>
       </div>
-    </PasswordGate>
+    </>
   )
 }

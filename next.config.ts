@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
       }
     ],
   },
-  serverExternalPackages: ['@sanity/vision'],
+  serverExternalPackages: ['@sanity/vision', 'isomorphic-dompurify', 'jsdom'],
 };
 
 export default nextConfig;

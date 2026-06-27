@@ -3,6 +3,8 @@ import { client } from "@/lib/sanity/client"
 import { aboutQuery, settingsQuery } from "@/lib/sanity/queries"
 import { PortableText } from "@portabletext/react"
 
+export const revalidate = 10;
+
 export default async function AboutPage() {
   const [fetchedAboutData, fetchedSettings] = await Promise.all([
     client.fetch(aboutQuery).catch(() => null),
@@ -11,7 +13,7 @@ export default async function AboutPage() {
 
   // Mock data for about page
   const mockAboutData = {
-    title: "About AceInArt",
+    title: "About Ace-in-art",
     subtitle: "Creative Technologist & Visual Artist",
     mainContent: [
       {

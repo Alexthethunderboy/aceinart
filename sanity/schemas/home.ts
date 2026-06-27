@@ -42,4 +42,17 @@ export default defineType({
       ],
     }),
   ],
+  initialValue: {
+    heroLabel: 'Portfolio & Archive',
+    heroTitle: 'Ace-in-art',
+    heroSubtitle: 'Experimental interfaces and raw artistic chaos.',
+    primaryCTA: {
+      label: 'ARCHIVE',
+      link: '/archive'
+    },
+    secondaryCTA: {
+      label: 'GET IN TOUCH',
+      link: 'mailto:hello@aceinart.com'
+    }
+  }
 })

@@ -1,4 +1,4 @@
-# AceInArt
+# Ace-in-art
 
 The digital portfolio and raw experiments of Creative Technologist Achilihu Chinedu Emmanuel.
 A digital archive leveraging Next.js, Sanity CMS, and Tailwind CSS.

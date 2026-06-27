@@ -1,138 +1,177 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 export function DynamicBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    };
+
+    window.addEventListener("resize", resize);
+    resize();
+
+    // Mouse interactivity
+    const mouse = { x: width / 2, y: height / 2, active: false };
+    const handleMouseMove = (e: MouseEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    };
+    const handleMouseLeave = () => {
+      mouse.active = false;
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseleave", handleMouseLeave);
+
+    // Node setup
+    const numNodes = 120;
+    const maxDistance = 180;
+    const nodes: { x: number; y: number; z: number; vx: number; vy: number; vz: number }[] = [];
+
+    for (let i = 0; i < numNodes; i++) {
+      nodes.push({
+        x: Math.random() * width - width / 2,
+        y: Math.random() * height - height / 2,
+        z: Math.random() * 1000 - 500,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5,
+        vz: (Math.random() - 0.5) * 1.5,
+      });
+    }
+
+    // 3D Projection & Rendering
+    let angleX = 0;
+    let angleY = 0;
+    const fl = 800; // Focal length
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Auto rotation
+      angleX += 0.001;
+      angleY += 0.002;
+
+      // Mouse influence on rotation
+      const targetAngleX = mouse.active ? (mouse.y - height / 2) * 0.00005 : 0;
+      const targetAngleY = mouse.active ? (mouse.x - width / 2) * 0.00005 : 0;
+      angleX += targetAngleX;
+      angleY += targetAngleY;
+
+      const cosX = Math.cos(angleX);
+      const sinX = Math.sin(angleX);
+      const cosY = Math.cos(angleY);
+      const sinY = Math.sin(angleY);
+
+      const projectedNodes: { x: number; y: number; scale: number; opacity: number }[] = [];
+
+      nodes.forEach((node) => {
+        // Move
+        node.x += node.vx;
+        node.y += node.vy;
+        node.z += node.vz;
+
+        // Bounce boundaries
+        if (node.x > width || node.x < -width) node.vx *= -1;
+        if (node.y > height || node.y < -height) node.vy *= -1;
+        if (node.z > 500 || node.z < -500) node.vz *= -1;
+
+        // 3D Rotation
+        // Y-axis rotation
+        const x1 = node.x * cosY - node.z * sinY;
+        const z1 = node.z * cosY + node.x * sinY;
+        
+        // X-axis rotation
+        const y1 = node.y * cosX - z1 * sinX;
+        const z2 = z1 * cosX + node.y * sinX;
+
+        // Perspective projection
+        const scale = fl / (fl + z2);
+        const x2 = x1 * scale + width / 2;
+        const y2 = y1 * scale + height / 2;
+
+        const opacity = Math.max(0, Math.min(1, scale * 0.8));
+
+        projectedNodes.push({ x: x2, y: y2, scale, opacity });
+      });
+
+      // Draw Lines
+      for (let i = 0; i < projectedNodes.length; i++) {
+        for (let j = i + 1; j < projectedNodes.length; j++) {
+          const p1 = projectedNodes[i];
+          const p2 = projectedNodes[j];
+
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDistance) {
+            const opacity = (1 - dist / maxDistance) * (p1.opacity * p2.opacity);
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            
+            // Mix Purple and Gold based on distance/index
+            const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+            gradient.addColorStop(0, `rgba(157, 78, 221, ${opacity * 1.0})`); // Purple
+            gradient.addColorStop(1, `rgba(255, 215, 0, ${opacity * 0.9})`); // Gold
+            
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = Math.max(0.2, p1.scale * 1.5);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw Nodes
+      projectedNodes.forEach((p, i) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, Math.max(0.1, p.scale * 2), 0, Math.PI * 2);
+        // Alternate colors for nodes
+        const color = i % 3 === 0 ? `rgba(255, 215, 0, ${p.opacity * 1.2})` : `rgba(157, 78, 221, ${p.opacity * 1.2})`;
+        ctx.fillStyle = color;
+        ctx.fill();
+      });
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    animationFrameId = requestAnimationFrame(render);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
     <div className="fixed inset-0 -z-10 h-full w-full overflow-hidden bg-background">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
-        transition={{ duration: 2 }}
-        className="absolute inset-0"
-      >
-        {/* Blob 1 - Primary/Gold */}
-        <motion.div
-          animate={{
-            x: [0, 100, -50, 0],
-            y: [0, -50, 50, 0],
-            scale: [1, 1.2, 0.9, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          }}
-          className="absolute -top-[10%] -left-[10%] h-[50vh] w-[50vh] rounded-full bg-primary/20 blur-[100px]"
-        />
-
-        {/* Blob 2 - Accent/Neon */}
-        <motion.div
-          animate={{
-            x: [0, -70, 30, 0],
-            y: [0, 80, -40, 0],
-            scale: [1, 1.1, 0.9, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          }}
-          className="absolute top-[20%] right-[10%] h-[40vh] w-[40vh] rounded-full bg-accent/20 blur-[90px]"
-        />
-
-        {/* Blob 3 - Secondary/Dark */}
-        <motion.div
-          animate={{
-            x: [0, 90, -40, 0],
-            y: [0, -60, 40, 0],
-            scale: [1, 1.3, 0.9, 1],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-[10%] left-[20%] h-[60vh] w-[60vh] rounded-full bg-secondary/30 blur-[120px]"
-        />
-      </motion.div>
-
-      {/* Floating Doodles / SVGs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-20">
-         {/* Doodle 1: Squiggle */}
-         <motion.svg
-            width="200" height="200" viewBox="0 0 200 200"
-            className="absolute top-[15%] left-[5%] text-accent"
-            animate={{ rotate: 360, y: [0, -30, 0] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-         >
-            <path d="M10,100 C50,0 150,200 190,100" fill="none" stroke="currentColor" strokeWidth="2" />
-         </motion.svg>
-
-         {/* Doodle 2: Circle Outline */}
-         <motion.div
-            className="absolute top-[40%] right-[15%] w-24 h-24 border border-primary/40 rounded-full"
-            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-         />
-
-         {/* Doodle 3: Crosses */}
-         <motion.div
-            className="absolute bottom-[25%] left-[10%] text-secondary/40 font-mono text-4xl"
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-         >
-            + + +
-         </motion.div>
-
-         {/* Doodle 4: Triangle */}
-         <motion.svg
-            width="100" height="100" viewBox="0 0 100 100"
-            className="absolute bottom-[10%] right-[5%] text-white/20"
-            animate={{ y: [0, -50, 0] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-         >
-            <polygon points="50,15 90,85 10,85" fill="none" stroke="currentColor" strokeWidth="2" />
-         </motion.svg>
-
-         {/* Doodle 5: Grid Points */}
-         <div className="absolute top-[20%] right-[20%] grid grid-cols-3 gap-2 opacity-30">
-            {[...Array(9)].map((_, i) => (
-              <motion.div 
-                key={i}
-                className="w-1 h-1 bg-white rounded-full"
-                animate={{ opacity: [0.2, 1, 0.2] }}
-                transition={{ duration: 3, delay: i * 0.2, repeat: Infinity }}
-              />
-            ))}
-         </div>
-
-         {/* Doodle 6: Floating Sparkles */}
-         <motion.svg
-            width="50" height="50" viewBox="0 0 24 24"
-            className="absolute top-[60%] left-[20%] text-neon-pink"
-            animate={{ scale: [0.8, 1.2, 0.8], rotate: 180 }}
-            transition={{ duration: 4, repeat: Infinity }}
-         >
-            <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" fill="currentColor" />
-         </motion.svg>
-         
-         {/* Doodle 7: Wave Line */}
-         <motion.svg
-            width="300" height="100" viewBox="0 0 300 100"
-            className="absolute bottom-[30%] left-[40%] text-neon-blue opacity-20"
-            animate={{ x: [-50, 50, -50] }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-         >
-             <path d="M0,50 Q75,0 150,50 T300,50" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="10 5" />
-         </motion.svg>
-      </div>
-      
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full opacity-100"
+        style={{ mixBlendMode: 'screen' }}
+      />
+      {/* Background blur layer over the canvas for ambient effect */}
+      <div className="absolute inset-0 backdrop-blur-[6px] pointer-events-none" />
       {/* Noise Overlay Texture for "Tactile" feel */}
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.05] mix-blend-overlay pointer-events-none" />
     </div>
   );
 }

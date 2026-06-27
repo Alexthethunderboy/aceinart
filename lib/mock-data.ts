@@ -1,9 +1,9 @@
 export const MOCK_HOME_DATA = {
   heroLabel: "Portfolio & Archive",
-  heroTitle: "AceInArt",
-  heroSubtitle: "Where raw creativity meets intentional design. A visual journey through color, form, and digital expression.",
+  heroTitle: "Ace-in-art",
+  heroSubtitle: "Experimental interfaces and raw artistic chaos.",
   primaryCTA: {
-    label: "EXPLORE WORK",
+    label: "ARCHIVE",
     link: "/archive"
   },
   secondaryCTA: {

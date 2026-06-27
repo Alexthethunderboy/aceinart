@@ -1,5 +1,5 @@
 import { FilterBuilder } from "@/components/gallery/FilterBuilder"
-import { HomeBentoGallery } from "@/components/gallery/HomeBentoGallery"
+import { SpatialGalleryCanvas } from "@/components/gallery/SpatialGalleryCanvas"
 import { GeometricSkeleton } from "@/components/ui/GeometricSkeleton"
 import { Suspense } from "react"
 import { client } from "@/lib/sanity/client"
@@ -56,5 +56,5 @@ export default async function ArchivePage() {
 async function GalleryWrapper() {
   const artworks = await client.fetch(artworksQuery).catch(() => [])
   const data = artworks.length > 0 ? artworks : MOCK_ARTWORKS
-  return <HomeBentoGallery initialArtworks={data} />
+  return <SpatialGalleryCanvas artworks={data} />
 }

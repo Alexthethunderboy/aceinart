@@ -28,7 +28,7 @@ export function BrandLogo({ settings, className, size = "md" }: BrandLogoProps) 
      <div className={cn("relative transition-all duration-300", sizeClasses[size], className)}>
          <Image 
            src={urlForImage(logo).url()} 
-           alt="AceInArt Logo"
+           alt="Ace-in-art Logo"
            width={800}
            height={400}
            className="object-contain w-full h-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:drop-shadow-[0_0_25px_rgba(255,0,128,0.5)] transition-all duration-500"
@@ -41,21 +41,9 @@ export function BrandLogo({ settings, className, size = "md" }: BrandLogoProps) 
         {/* User asked for a "placeholder for it" since logo is being made. Let's make a graphic placeholder. */}
         
         <svg viewBox="0 0 400 120" className={cn("w-full h-auto fill-current", sizeClasses[size])}>
-            <defs>
-               <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="5" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-               </filter>
-            </defs>
-            
             {/* Placeholder Text Graphic */}
-             <text x="50%" y="80" textAnchor="middle" fontSize="80" fontWeight="900" fontFamily="sans-serif" letterSpacing="4">
-                <tspan fill="#FF0080" filter="url(#neon-glow)">A</tspan>
-                <tspan fill="white" fontWeight="300">ce</tspan>
-                <tspan fill="#0080FF" filter="url(#neon-glow)">I</tspan>
-                <tspan fill="white" fontWeight="300">n</tspan>
-                <tspan fill="#8000FF" filter="url(#neon-glow)">A</tspan>
-                <tspan fill="white" fontWeight="300">rt</tspan>
+             <text x="50%" y="80" textAnchor="middle" fontSize="64" fontWeight="800" fontFamily="sans-serif" letterSpacing="2">
+                <tspan fill="white">Ace-in-art</tspan>
              </text>
         </svg>
     </div>

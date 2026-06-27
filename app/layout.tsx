@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { NuqsProvider } from "@/components/providers/nuqs-provider";
@@ -13,6 +13,8 @@ import { SocialDock } from "@/components/layout/SocialDock";
 const inter = Inter({ subsets: ["latin"], variable: "--font-switzer" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
+export const revalidate = 10;
+
 import { client } from "@/lib/sanity/client";
 import { settingsQuery } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
@@ -25,27 +27,27 @@ export async function generateMetadata(): Promise<Metadata> {
     : "https://aceinart.com/og-image.jpg";
 
   return {
-    title: settings?.title || "AceInArt | Portfolio & Archives",
+    title: settings?.title || "Ace-in-art | Portfolio & Archives",
     description: settings?.description || "The digital portfolio and raw experiments of Creative Technologist Achilihu Chinedu Emmanuel.",
     openGraph: {
       type: "website",
       locale: "en_US",
       url: "https://aceinart.com",
-      title: settings?.title || "AceInArt | Portfolio",
+      title: settings?.title || "Ace-in-art | Portfolio",
       description: settings?.description || "Digital archives and raw experiments.",
-      siteName: settings?.title || "AceInArt",
+      siteName: settings?.title || "Ace-in-art",
       images: [
         {
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: settings?.title || "AceInArt",
+          alt: settings?.title || "Ace-in-art",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: settings?.title || "AceInArt",
+      title: settings?.title || "Ace-in-art",
       creator: "@aceinart",
       images: [ogImageUrl],
     },

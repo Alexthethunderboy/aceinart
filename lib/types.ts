@@ -26,11 +26,29 @@ export interface Settings {
     artistImage?: SanityImage
 }
 
+export interface GalleryItem {
+  _type: 'image' | 'file'
+  _key: string
+  asset: {
+    _ref: string
+    _type: 'reference'
+  }
+  assetUrl?: string // populated by our GROQ query
+  alt?: string
+  hotspot?: {
+    x: number
+    y: number
+    height: number
+    width: number
+  }
+}
+
 export interface Artwork {
   _id: string
   title: string
   slug: { current: string }
   mainImage: SanityImage
+  gallery?: GalleryItem[]
   year: string
   medium: string
   vulnerabilityLevel: number

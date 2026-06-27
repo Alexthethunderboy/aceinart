@@ -6,41 +6,41 @@
   :root {
     /* Pigment & Pulse Theme - Dark & Colorful Enforced */
 
-    /* Deep Black/Navy Background */
-    --background: 222 47% 2%;
-    /* #02040a - Deep Navy Black */
+    /* Deep Black/Purple Background */
+    --background: 265 80% 4%;
+    /* Deep Purple Black */
     --foreground: 210 40% 98%;
     /* Soft White */
 
     /* Glassmorphic Card Backgrounds */
-    --card: 222 47% 4%;
+    --card: 265 80% 6%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 4%;
+    --popover: 265 80% 6%;
     --popover-foreground: 210 40% 98%;
 
-    /* Vibrant Primary - Electric Purple/Blue Gradient feel via single color for now, or use gradient in utilities */
+    /* Vibrant Primary - Purple */
     --primary: 265 89% 66%;
-    /* #9d4edd - Electric Purple */
+    /* Electric Purple */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 199 89% 48%;
-    /* #0da2ff - Electric Blue */
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 43 100% 50%;
+    /* Gold */
+    --secondary-foreground: 265 80% 4%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 265 33% 17%;
+    --muted-foreground: 265 20% 65%;
 
-    --accent: 316 73% 52%;
-    /* #d9048e - Hot Pink */
-    --accent-foreground: 210 40% 98%;
+    --accent: 43 100% 50%;
+    /* Gold */
+    --accent-foreground: 265 80% 4%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 265 89% 66%;
+    --border: 265 33% 17%;
+    --input: 265 33% 17%;
+    --ring: 43 100% 50%;
 
     --radius: 0.75rem;
     /* Slightly more rounded for modern feel */

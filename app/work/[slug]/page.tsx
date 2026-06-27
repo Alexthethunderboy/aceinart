@@ -12,6 +12,8 @@ import { MacroLensCard } from "@/components/gallery/MacroLensCard"
 import { CreativeDNARadar } from "@/components/gallery/CreativeDNARadar"
 import { Artwork } from "@/lib/types"
 
+export const revalidate = 10;
+
 export async function generateMetadata(
   { params }: { params: { slug: string } },
   parent: ResolvingMetadata
@@ -21,7 +23,7 @@ export async function generateMetadata(
 
   if (!art) {
     return {
-      title: 'Artwork Not Found | AceInArt',
+      title: 'Artwork Not Found | Ace-in-art',
     }
   }
 
@@ -31,11 +33,11 @@ export async function generateMetadata(
     : previousImages[0]
 
   return {
-    title: `${art.title} | AceInArt`,
-    description: art.artistNote || `View ${art.title} by AceInArt.`,
+    title: `${art.title} | Ace-in-art`,
+    description: art.artistNote || `View ${art.title} by Ace-in-art.`,
     openGraph: {
       title: art.title,
-      description: art.artistNote || `View ${art.title} by AceInArt.`,
+      description: art.artistNote || `View ${art.title} by Ace-in-art.`,
       images: [ogImage, ...previousImages],
     },
   }
