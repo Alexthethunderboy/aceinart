@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { GalleryItem } from "@/lib/types"
 import { urlForImage } from "@/lib/sanity/image"
@@ -27,12 +27,12 @@ export function LightboxModal({ isOpen, onClose, mediaList, initialIndex = 0 }: 
   // Handle keyboard navigation
   const showNext = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation()
-    setCurrentIndex((prev) => (prev + 1) % mediaList.length)
+    setCurrentIndex((prev: number) => (prev + 1) % mediaList.length)
   }, [mediaList.length])
 
   const showPrev = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation()
-    setCurrentIndex((prev) => (prev - 1 + mediaList.length) % mediaList.length)
+    setCurrentIndex((prev: number) => (prev - 1 + mediaList.length) % mediaList.length)
   }, [mediaList.length])
 
   useEffect(() => {
