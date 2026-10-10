@@ -1,7 +1,13 @@
 # Ace-in-art
 
 The digital portfolio and raw experiments of Creative Technologist Achilihu Chinedu Emmanuel.
-A digital archive leveraging Next.js, Sanity CMS, and Tailwind CSS.
+An archive built with Next.js, Sanity CMS and Tailwind CSS.
+
+[Explore Ace-in-art](https://aceinart.vercel.app/)
+
+![aceinart — existing portfolio capture](https://raw.githubusercontent.com/Alexthethunderboy/Portfolio/b4c8f605bdb311f2be00d14855b4914a3d662cf9/public/projects/previews/aceinart.jpg)
+
+Existing portfolio capture, verified 8 October 2026; not evidence of current uptime or completed validation.
 
 ## Features
 
@@ -9,7 +15,7 @@ A digital archive leveraging Next.js, Sanity CMS, and Tailwind CSS.
 - **Sanity CMS Integration**: Easy content management for artworks, exhibitions, and settings.
 - **Voltage Light Brush**: Interactive cursor trail effect.
 - **VibeSync**: Audio-reactive visualizations.
-- **Dark Mode**: Premium dark aesthetic.
+- **Dark Mode**: Dark interface.
 
 ## Tech Stack
 
@@ -23,7 +29,8 @@ A digital archive leveraging Next.js, Sanity CMS, and Tailwind CSS.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/aceinart.git
+   git clone https://github.com/Alexthethunderboy/aceinart.git
+   cd aceinart
    ```
 
 2. Install dependencies:
@@ -43,5 +50,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deployment
 
-This project is optimized for deployment on [Vercel](https://vercel.com).
+The project uses [Vercel](https://vercel.com) deployment configuration.
 Ensure you add the environment variables in your Vercel project settings.
+
+## Verification boundary
+
+This documentation update corrects the clone URL and adds an existing capture. It does not establish that every advertised interaction works or that the CMS is ready for production. Validate representative artwork, mobile/keyboard navigation and CMS configuration before release. Project and artist branding remain Ace-in-art's.
+
+---
+
+Built by [Thunderboy](https://thunderboy.vercel.app).
