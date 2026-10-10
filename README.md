@@ -1,7 +1,7 @@
 # Ace-in-art
 
 The digital portfolio and raw experiments of Creative Technologist Achilihu Chinedu Emmanuel.
-A digital archive leveraging Next.js, Sanity CMS, and Tailwind CSS.
+An archive built with Next.js, Sanity CMS and Tailwind CSS.
 
 [Explore Ace-in-art](https://aceinart.vercel.app/)
 
@@ -15,7 +15,7 @@ Existing portfolio capture, verified 8 October 2026; not evidence of current upt
 - **Sanity CMS Integration**: Easy content management for artworks, exhibitions, and settings.
 - **Voltage Light Brush**: Interactive cursor trail effect.
 - **VibeSync**: Audio-reactive visualizations.
-- **Dark Mode**: Premium dark aesthetic.
+- **Dark Mode**: Dark interface.
 
 ## Tech Stack
 
@@ -50,7 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deployment
 
-This project is optimized for deployment on [Vercel](https://vercel.com).
+The project uses [Vercel](https://vercel.com) deployment configuration.
 Ensure you add the environment variables in your Vercel project settings.
 
 ## Verification boundary
